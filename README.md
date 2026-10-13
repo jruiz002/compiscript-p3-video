@@ -94,14 +94,16 @@ sequenceDiagram
     Caller->>Caller: push param(n-1) ... push param(0)  (orden inverso)
     Caller->>Callee: jal f_funcname   (jal fija $ra automáticamente)
     Note over Callee: PRÓLOGO
-    Callee->>Callee: sp -= 8 ; sw $ra,4(sp) ; sw $fp,0(sp)
+    Callee->>Callee: sp -= 8
+    Callee->>Callee: sw $ra,4(sp), sw $fp,0(sp)
     Callee->>Callee: fp = sp   (fp queda apuntando al slot "fp+0")
     Callee->>Callee: sp -= frame_size   (reserva static link + locales + temporales)
     Note over Callee: cuerpo de la función
     Note over Callee: EPÍLOGO (en cada return)
     Callee->>Callee: v0 = valor de retorno (si aplica)
-    Callee->>Callee: sp = fp ; sp += 8   (libera frame)
-    Callee->>Callee: ra = mem[fp+4] ; fp = mem[fp+0]  (leídos ANTES de mover fp)
+    Callee->>Callee: sp += frame_size   (sp vuelve a fp)
+    Callee->>Callee: ra = mem[fp+4], fp = mem[fp+0]  (leídos ANTES de mover fp)
+    Callee->>Callee: sp += 8   (libera frame)
     Callee->>Caller: jr $ra
     Note over Caller: sp += 4*n   (el caller limpia los args que empujó)
 ```

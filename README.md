@@ -1,6 +1,6 @@
 # DISEÑO — Fase 3: Generación de código MIPS
 
-Este documento sustenta el video del Proyecto 3. Responde a los tres pedidos del enunciado:
+Este documento sustenta el video del Proyecto 3 ([ver video en YouTube](https://youtu.be/66V5c5KZSb0), no listado). Responde a los tres pedidos del enunciado:
 
 1. Secuencias de llamada/retorno (manejo del stack pointer).
 2. Asignación de registros (`getReg()`) con spilling a memoria.
